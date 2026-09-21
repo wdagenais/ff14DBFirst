@@ -1,0 +1,101 @@
+﻿@model IEnumerable<BDFirstFF14.Models.Personnage>
+
+@{
+    ViewData["Title"] = "Index";
+    // ViewData["client"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-5">
+		<h1>Index</h1>
+    </div>
+
+    @* <div class="col-3">
+        <h1></h1>
+    </div> *@
+
+    <div class="col-2">
+        <h2>Bonjour @ViewData["client"]!</h2>
+    </div>
+
+    <div class="col-3">
+        <a class="btnIndex" href="@Url.Action("StatPopServeur","Personnages")">Statistique des serveurs</a>
+    </div>
+
+    <div class="col-1">
+        <a class="btnIndex" href="@Url.Action("Connexion","Clients")">Connexion</a>
+    </div>
+
+    <div class="col-1">
+            <a class="btnIndex" href="@Url.Action("Inscription","Clients")">Inscription</a>
+    </div>
+	
+</div>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DateCreation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pseudo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Race)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Classe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GrandeCompagnie)
+            </th>
+
+            <th>
+                Details
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Server)
+            </th>
+
+          @*    <th>
+                @Html.DisplayNameFor(model => model.Server)
+            </th> *@
+
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pseudo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Race)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Classe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GrandeCompagnie.Nom)
+            </td>
+                <td>
+                    <a asp-action="VueImage" asp-route-itemid="@item.PersonnageId">Details</a>
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Server.Nom)
+            </td>
+
+        </tr>
+}
+    </tbody>
+</table>

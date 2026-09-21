@@ -1,0 +1,69 @@
+﻿@model IEnumerable<BDFirstFF14.Models.VwPopulationServeurStat>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-3">
+        <h1>Index</h1>
+    </div>
+
+    <div class="col-2">
+        <h1></h1>
+    </div>
+    <div class="col-2">
+        <a class="btnIndex" href="@Url.Action("Deconnexion","Clients")">Deconnexion</a>
+    </div>
+
+    <div class="col-2">
+        <a class="btnIndex" href="@Url.Action("Connexion","Clients")">Connexion</a>
+    </div>
+
+    <div class="col-2">
+        <a class="btnIndex" href="@Url.Action("Inscription", "Clients")">Inscription</a>
+    </div>
+
+</div>
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomDuServeur)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomDeLaGrandeCompanie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreDePersonages)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Region)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomDuServeur)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomDeLaGrandeCompanie)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreDePersonages)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Region)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

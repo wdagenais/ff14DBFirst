@@ -1,0 +1,74 @@
+﻿@model BDFirstFF14.ViewModel.RacePrefVM
+
+@{
+    ViewData["Title"] = "VueImage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>VueImage</h1>
+
+@* <div class="row">
+    <div class="col-4">
+        <a class="btnIndex" href="@Url.Action("UserDejaAuthentifier","Personnages")">Accueuil</a>
+    </div>
+</div> *@
+
+<div>
+    <h4>RacePrefVM</h4>
+    <hr />
+    <div class="row">
+        <div class="col-8">
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PersonnageId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PersonnageId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nom)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nom)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Race)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Race)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NomImage)
+        </dt>
+        <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.NomImage)
+        </dd>
+    </dl>
+    </div>
+
+
+<div class="col-4 d-flex justify-content-center align-items-start">
+            @if (!string.IsNullOrEmpty(Model.NomImage))
+    {
+        <div @* style="width: 250px; height: 250px; border: 1px solid #ccc; overflow: hidden;" *@>
+                    <img src="@Url.Action("GetProfilpicImage", "Personnages", new { nomImg = Model.NomImage })"
+                         alt="Profile Image"
+                         style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+    }
+    else
+    {
+        <p>No image available.</p>
+    }
+</div>
+</div>
+
+<div class="row align-items-center">
+
+    <div class="col-4"></div>
+        <div class="col-4">
+            <a style="margin:20px" class="btnIndex" href="@Url.Action("AjouterImage","Personnages", new {id = Model.PersonnageId})">Changer l'image</a>
+        </div>
+    
+        <div class="col-4"></div>
+</div>

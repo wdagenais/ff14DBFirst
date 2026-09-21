@@ -1,0 +1,43 @@
+USE [master]
+GO
+/****** Object:  Database [BD5_Mario_Kart]    Script Date: 2023-09-06 10:24:23 ******/
+CREATE DATABASE [BD_FF14]
+ 
+GO
+USE [BD_FF14]
+GO
+
+
+
+GO
+EXEC sp_configure filestream_access_level, 2 RECONFIGURE
+
+ALTER DATABASE BD_FF14
+ADD FILEGROUP FG_Images_1883442 CONTAINS FILESTREAM;
+GO
+
+ALTER DATABASE BD_FF14
+ADD FILE (
+	NAME = FG_Images_1883442,
+	FILENAME = 'c:\EspaceLabo\FG_Images_1883442'
+)
+TO FILEGROUP FG_Images_1883442
+GO
+
+
+GO
+CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'Passw0rd!Passw0rd!'
+GO
+
+SELECT * FROM sys.symmetric_keys;
+
+
+CREATE CERTIFICATE MonCertificate WITH SUBJECT = 'ChiffrementMotDePasse';
+GO
+
+SELECT * FROM sys.certificates
+
+
+CREATE SYMMETRIC KEY MaSuperCle WITH ALGORITHM = AES_256 ENCRYPTION BY CERTIFICATE MonCertificate
+SELECT * FROM sys.symmetric_keys;
+GO

@@ -1,0 +1,61 @@
+﻿@model BDFirstFF14.ViewModel.ChangerGrandeCompanieVM
+
+@{
+    ViewData["Title"] = "ChangeGrandeCompagnie";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>ChangeGrandeCompagnie</h1>
+
+<h4>ChangerGrandeCompanieVM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ChangeGrandeCompagnie" method="post">
+            <input type="hidden" asp-for="PersonnageId" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+
+
+                <div class="form-group col-6">
+                    <label asp-for="GrandeCompanieId" class="control-label"></label>
+                    <div>
+                        <select asp-for="GrandeCompanieId" class="form-control">
+                            @foreach (var item in Model.GrandeCompanies)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                        <span asp-validation-for="GrandeCompanies" class="text-danger"></span>
+                    </div>
+                </div>
+                </div>
+
+                @* <label asp-for="GrandeCompanieId" class="control-label"></label>
+                <select asp-for="GrandeCompanieId" class="form-control" asp-items="Model.GrandeCompanies" />
+                <span asp-validation-for="GrandeCompanieId" class="text-danger"></span>
+            </div> *@
+          @*   <div class="form-group">
+                <label asp-for="PersonnageId" class="control-label"></label>
+                <input asp-for="PersonnageId" class="form-control" />
+                <span asp-validation-for="PersonnageId" class="text-danger"></span>
+            </div> *@
+         @*    <div class="form-group">
+                <label asp-for="GrandeCompanies" class="control-label"></label>
+                <select asp-for="GrandeCompanies" class="form-control"  />
+                <span asp-validation-for="GrandeCompanies" class="text-danger"></span>
+            </div> *@
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

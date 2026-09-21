@@ -1,0 +1,168 @@
+﻿@model BDFirstFF14.ViewModel.FiltrePersoVM
+
+@{
+    ViewData["Title"] = "Index";
+    // ViewData["client"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-5">
+        <h1>Index</h1>
+    </div>
+
+    @* <div class="col-3">
+    <h1></h1>
+    </div> *@
+
+    <div class="col-3">
+        <h2>Bonjour @ViewData["client"]!</h2>
+    </div>
+    @* <div class="col-1">
+        <a class="btnIndex" href="@Url.Action("AjouterImage","Personnages")">UploadImg</a>
+    </div> *@
+
+    <div class="col-1">
+        <a class="btnIndex" href="@Url.Action("Deconnexion","Clients")">Deconnexion</a>
+    </div>
+
+    <div class="col-1">
+        <a class="btnIndex" href="@Url.Action("Connexion","Clients")">Connexion</a>
+    </div>
+
+    <div class="col-1">
+        <a class="btnIndex" href="@Url.Action("Inscription","Clients")">Inscription</a>
+    </div>
+
+</div>
+
+<form asp-action="UserDejaAuthentifier" method="post">
+
+    <div class="form-group col-6">
+        <label asp-for="Serveur" class="control-label"></label>
+        <div>
+            <select asp-for="Serveur" class="form-control">
+                @foreach (var item in Model.Serveurs)
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            </select>
+            <span asp-validation-for="Serveur" class="text-danger"></span>
+        </div>
+    </div>
+
+
+
+    <div class="form-group col-6">
+        <label asp-for="Race" class="control-label"></label>
+        <div>
+            <select asp-for="Race" class="form-control">
+                @foreach (var item in Model.Races)
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            </select>
+            <span asp-validation-for="Race" class="text-danger"></span>
+        </div>
+    </div>
+
+
+
+    <div class="form-group col-6">
+        <label asp-for="GrandeCompanie" class="control-label"></label>
+        <div>
+            <select asp-for="GrandeCompanie" class="form-control">
+                @foreach (var item in Model.GrandeCompanies)
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            </select>
+            <span asp-validation-for="GrandeCompanie" class="text-danger"></span>
+        </div>
+    </div>
+
+
+
+
+
+<div class="row align-items-end">
+    <div class="form-group col-3">
+        <label asp-for="Page" class="control-label"></label>
+        <div>
+            <input asp-for="Page" class="form-control" />
+            <span asp-validation-for="Page" class="text-danger"></span>
+        </div>
+    </div>
+
+        <button style="margin:30px" type="submit" class="btn btn-primary">Filtrer</button>
+
+</form>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Date de création
+            </th>
+         
+            <th>
+                Pseudo
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Race)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Classe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GrandeCompanie)
+            </th>
+            <th>
+                Details
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Serveur)
+            </th>
+            <th>
+                Changer De Grande Companie
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.PersoVMs)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCreation)
+                </td>
+                <td>
+                   <a href="@Url.Action("VueImage","Personnages", new{id = item.PersonnageId})">@Html.DisplayFor(modelItem => item.Pseudo)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Race)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Classe)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GrandeCompagnie)
+                </td>
+                <td>
+                    <a asp-action="VueImage" asp-route-id="@item.PersonnageId">Details</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Serveur)
+                </td>
+                <td>
+                    <a href="@Url.Action("ChangeGrandeCompagnie","Personnages", new { id = item.PersonnageId})">Changer de Grande Companie</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
